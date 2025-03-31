@@ -1,4 +1,3 @@
-import java.util.Calendar;
 import java.util.Random;
 
 public class NossoVetor{
@@ -13,7 +12,8 @@ public class NossoVetor{
     public boolean estaVazio() {
         return ocupacao == 0;
     }
-        public void preencheVetor() {
+
+    public void preencheVetor() {
         Random random = new Random();
         for (int i = 0; i < vetor.length; i++) {
             vetor[i] = random.nextInt(vetor.length * 1);
