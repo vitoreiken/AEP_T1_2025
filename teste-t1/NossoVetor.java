@@ -58,7 +58,7 @@ public class NossoVetor{
     }
 
     public int buscaLinear(int elemento){
-        for(int i = 0; i < ocupacao; i++){
+        for(int i = 0; i < vetor.length; i++){
             if(vetor[i] == elemento){
                 return i;
             }
@@ -68,16 +68,18 @@ public class NossoVetor{
     
     public int buscaBinaria(int elemento){
         int inicio = 0;
-        int fim = vetor.length;
-        while (inicio<vetor[fim-1]){
+        int fim = vetor.length-1;
+        while (inicio<=fim){
             int meio = (inicio+fim)/2;
-            if (vetor[meio]<elemento){
-                inicio = meio;
+            if (elemento==vetor[meio]){
+                return meio;
+            } if (elemento>vetor[meio]){
+                inicio = meio+1;
             } else{
-                fim = meio;
+                fim = meio-1;
             }
         }
-        return fim;
+        return -1;
     }
 
     @Override
