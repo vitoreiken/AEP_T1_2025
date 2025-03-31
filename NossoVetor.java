@@ -1,11 +1,13 @@
-import java.util.Calendar;
+// import java.util.Calendar;
+
 import java.util.Random;
 
-public class NossoVetor{
+public class NossoVetor {
+
     private int[] vetor;
     private int ocupacao;
-    
-    public NossoVetor(int tamanho){
+
+    public NossoVetor(int tamanho) {
         vetor = new int[tamanho];
         ocupacao = 0;
     }
@@ -13,7 +15,8 @@ public class NossoVetor{
     public boolean estaVazio() {
         return ocupacao == 0;
     }
-        public void preencheVetor() {
+
+    public void preencheVetor() {
         Random random = new Random();
         for (int i = 0; i < vetor.length; i++) {
             vetor[i] = random.nextInt(vetor.length * 1);
@@ -22,61 +25,78 @@ public class NossoVetor{
         ocupacao = vetor.length;
     }
 
-    public void bubbleSort(){
-        for (int i=1; i<vetor.length; i++){
-            for (int j=0; j<vetor.length-i; j++){
-                if (vetor[j]>vetor[j+1]){
+    public long bubbleSort() {
+        long contadorBS = 0;
+        for (int i = 1; i < vetor.length; i++) {
+            for (int j = 0; j < vetor.length - i; j++) {
+                if (vetor[j] > vetor[j + 1]) {
                     int aux = vetor[j];
-                    vetor[j] = vetor[j+1];
-                    vetor[j+1] = aux;
+                    vetor[j] = vetor[j + 1];
+                    vetor[j + 1] = aux;
+
+                    contadorBS++;
                 }
             }
         }
+        return contadorBS;
     }
 
-    public void selectionSort(){
-        for (int i=0; i<vetor.length-1; ++i){
+    public long selectionSort() {
+        long contadorSS = 0;
+        for (int i = 0; i < vetor.length - 1; ++i) {
             int min = i;
-            for (int j=i+1; j<vetor.length; ++j){
-                if (vetor[j]<vetor[min])
-                    min=j;
-            int x = vetor[i];
-            vetor[i] = vetor[min];
-            vetor[min] = x;
+            for (int j = i + 1; j < vetor.length; ++j) {
+                if (vetor[j] < vetor[min]) {
+                    min = j;
+                }
+                int x = vetor[i];
+                vetor[i] = vetor[min];
+                vetor[min] = x;
+                if (vetor[i] != vetor[min]) {
+                    contadorSS++;
+                }
+
             }
         }
+        return contadorSS;
     }
 
-    public void insertionSort(){
-        for (int j=1; j<vetor.length; ++j){
+    public long insertionSort() {
+        long contadorIS = 0;
+        for (int j = 1; j < vetor.length; ++j) {
             int x = vetor[j];
             int i;
-            for (i=j-1; i>=0&&vetor[i]>x; --i)
-                vetor[i+1] = vetor[i];
-            vetor[i+1]=x;
+            for (i = j - 1; i >= 0 && vetor[i] > x; --i) {
+                vetor[i + 1] = vetor[i];
+                contadorIS++;
+            }
+            vetor[i + 1] = x;
         }
+
+        return contadorIS;
     }
 
-    public int buscaLinear(int elemento){
-        for(int i = 0; i < vetor.length; i++){
-            if(vetor[i] == elemento){
+    public int buscaLinear(int elemento) {
+        for (int i = 0; i < vetor.length; i++) {
+            if (vetor[i] == elemento) {
                 return i;
             }
         }
         return -1;
     }
-    
-    public int buscaBinaria(int elemento){
+
+    public int buscaBinaria(int elemento) {
         int inicio = 0;
-        int fim = vetor.length-1;
-        while (inicio<=fim){
-            int meio = (inicio+fim)/2;
-            if (elemento==vetor[meio]){
+        int fim = vetor.length - 1;
+        while (inicio <= fim) {
+            int meio = (inicio + fim) / 2;
+            if (elemento == vetor[meio]) {
                 return meio;
-            } if (elemento>vetor[meio]){
-                inicio = meio+1;
-            } else{
-                fim = meio-1;
+            }
+            if (elemento > vetor[meio]) {
+                inicio = meio + 1;
+            } else {
+                fim = meio - 1;
             }
         }
         return -1;
