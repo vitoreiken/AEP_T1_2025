@@ -1,6 +1,7 @@
 public class TesteVetor {
     public static void main(String[] args) {
         NossoVetor vetorTeste = new NossoVetor(10);
+        
         vetorTeste.preencheVetor();
         vetorTeste.bubbleSort();
         System.out.println(vetorTeste.buscaLinear(7));
