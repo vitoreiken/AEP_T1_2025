@@ -77,20 +77,27 @@ public class NossoVetor {
     }
 
     public int buscaLinear(int elemento) {
+        int contadorLinear = 0;
+
         for (int i = 0; i < vetor.length; i++) {
             if (vetor[i] == elemento) {
-                return i;
+                // System.out.println(i); 
+
+                contadorLinear++;
             }
         }
-        return -1;
+        return contadorLinear;
     }
 
     public int buscaBinaria(int elemento) {
+        int contadorBinario = 0;
+
         int inicio = 0;
         int fim = vetor.length - 1;
         while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
             if (elemento == vetor[meio]) {
+                // contadorBinario++;      //   CORRIGIR O LOCAL ONDE É APLICADO O CONTADOR!!
                 return meio;
             }
             if (elemento > vetor[meio]) {
@@ -99,7 +106,7 @@ public class NossoVetor {
                 fim = meio - 1;
             }
         }
-        return -1;
+        return contadorBinario;
     }
 
     @Override
