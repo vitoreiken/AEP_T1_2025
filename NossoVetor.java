@@ -36,6 +36,7 @@ public class NossoVetor {
 
                     contadorBS++;
                 }
+                contadorComparacaoBS++;
             }
         }
         return contadorBS;
@@ -56,7 +57,12 @@ public class NossoVetor {
                     contadorSS++;
                 }
 
+
             }
+            int temp = vetor[min];
+            vetor[min] = vetor[i];
+            vetor[i] = temp;
+            contadorTrocaSS += 3;
         }
         return contadorSS;
     }
@@ -84,6 +90,7 @@ public class NossoVetor {
             if (vetor[i] == elemento) {
                 // System.out.println(i);
                 return contadorLinear;
+
             }
         }
         return contadorLinear;
@@ -101,6 +108,7 @@ public class NossoVetor {
                 return contadorBinario;
             }
             contadorBinario++;
+
             if (elemento > vetor[meio]) {
                 inicio = meio + 1;
             } else {
