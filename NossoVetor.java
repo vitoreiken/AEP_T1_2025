@@ -25,9 +25,8 @@ public class NossoVetor {
         ocupacao = vetor.length;
     }
 
-    public String bubbleSort() {
-        long contadorTrocaBS = 0; // contador de trocas do BubbleSort
-        long contadorComparacaoBS = 0; // contador de comparações do BubbleSort
+    public long bubbleSort() {
+        long contadorBS = 0;
         for (int i = 1; i < vetor.length; i++) {
             for (int j = 0; j < vetor.length - i; j++) {
                 if (vetor[j] > vetor[j + 1]) {
@@ -35,60 +34,63 @@ public class NossoVetor {
                     vetor[j] = vetor[j + 1];
                     vetor[j + 1] = aux;
 
-                    contadorTrocaBS += 3;   
+                    contadorBS++;
                 }
                 contadorComparacaoBS++;
             }
         }
-        return "contador de trocas do bubbleSort: " + contadorTrocaBS + " || contador de comparação do bubbleSort: " + contadorComparacaoBS;
+        return contadorBS;
     }
 
-    // {3, 9, 4, 1, 2, 6, 5, 8, 10, 7}
-    public String selectionSort() {
-        long contadorTrocaSS = 0, contadorComparacaoSS = 0;
-        for (int i = 0; i < vetor.length - 1; i++) {
+    public long selectionSort() {
+        long contadorSS = 0;
+        for (int i = 0; i < vetor.length - 1; ++i) {
             int min = i;
-            for (int j = i + 1; j < vetor.length; j++) {
-                contadorComparacaoSS++;
-                if (vetor[min] > vetor[j]) {
+            for (int j = i + 1; j < vetor.length; ++j) {
+                if (vetor[j] < vetor[min]) {
                     min = j;
-                    contadorTrocaSS++;
                 }
+                int x = vetor[i];
+                vetor[i] = vetor[min];
+                vetor[min] = x;
+                if (vetor[i] != vetor[min]) {
+                    contadorSS++;
+                }
+
+
             }
             int temp = vetor[min];
             vetor[min] = vetor[i];
             vetor[i] = temp;
             contadorTrocaSS += 3;
         }
-        return "contador de trocas do SelectionSort: " + contadorTrocaSS + " || contador de comparação do SelectionSort: " + contadorComparacaoSS;
+        return contadorSS;
     }
 
-    // {3, 4, 9, 1, 2, 6, 5, 8, 10, 7}
-    public String insertionSort() {
-        long contadorTrocaIS = 0, contadorComparacaoIS = 0;
-        for (int i = 1; i < vetor.length; i++) {
-            int temp = vetor[i];
-            int j = i - 1;
-            while (j >= 0 && vetor[j] > temp) {
-                vetor[j + 1] = vetor[j];
-                j--;
-                contadorTrocaIS++;
-                contadorComparacaoIS++;
+    public long insertionSort() {
+        long contadorIS = 0;
+        for (int j = 1; j < vetor.length; ++j) {
+            int x = vetor[j];
+            int i;
+            for (i = j - 1; i >= 0 && vetor[i] > x; --i) {
+                vetor[i + 1] = vetor[i];
+                contadorIS++;
             }
-            vetor[j + 1] = temp;
-            contadorTrocaIS++;
+            vetor[i + 1] = x;
         }
-        return "contador de trocas do insertionSort: " + contadorTrocaIS + " || contador de comparação do insertionSort: " + contadorComparacaoIS;
+
+        return contadorIS;
     }
 
     public int buscaLinear(int elemento) {
-        int contadorLinear = 0; // Contador de comparações
+        int contadorLinear = 0;
 
         for (int i = 0; i < vetor.length; i++) {
+            contadorLinear++;
             if (vetor[i] == elemento) {
-                // System.out.println(i); 
+                // System.out.println(i);
+                return contadorLinear;
 
-                contadorLinear++; 
             }
         }
         return contadorLinear;
@@ -101,10 +103,12 @@ public class NossoVetor {
         int fim = vetor.length - 1;
         while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
+            contadorBinario++;
             if (elemento == vetor[meio]) {
-                // contadorBinario++;      //   CORRIGIR O LOCAL ONDE É APLICADO O CONTADOR!!
-                return meio;
+                return contadorBinario;
             }
+            contadorBinario++;
+
             if (elemento > vetor[meio]) {
                 inicio = meio + 1;
             } else {
