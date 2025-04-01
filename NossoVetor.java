@@ -90,20 +90,23 @@ public class NossoVetor {
     }
 
     public int buscaBinaria(int elemento) {
-        int contadorBinario = 0;
+        int contadorBinario = 0; // Contador de comparações
 
         int inicio = 0;
         int fim = vetor.length - 1;
         while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
+            contadorBinario++;
             if (elemento == vetor[meio]) {
-                // contadorBinario++;      //   CORRIGIR O LOCAL ONDE É APLICADO O CONTADOR!!
+                //   CORRIGIR O LOCAL ONDE É APLICADO O CONTADOR!!
                 return meio;
             }
             if (elemento > vetor[meio]) {
                 inicio = meio + 1;
+                contadorBinario++;
             } else {
                 fim = meio - 1;
+                contadorBinario++;
             }
         }
         return contadorBinario;
