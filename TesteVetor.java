@@ -38,8 +38,6 @@ public class TesteVetor {
             System.out.println(vetorTeste.buscaLinear(e));
             System.out.println(vetorTeste.insertionSort());
             System.out.println(vetorTeste.buscaBinaria(e) + "\n");
-
-            
         }
 
         scanner.close();
