@@ -80,10 +80,10 @@ public class NossoVetor {
         int contadorLinear = 0;
 
         for (int i = 0; i < vetor.length; i++) {
+            contadorLinear++;
             if (vetor[i] == elemento) {
-                // System.out.println(i); 
-
-                contadorLinear++;
+                // System.out.println(i);
+                return contadorLinear;
             }
         }
         return contadorLinear;
@@ -98,15 +98,13 @@ public class NossoVetor {
             int meio = (inicio + fim) / 2;
             contadorBinario++;
             if (elemento == vetor[meio]) {
-                //   CORRIGIR O LOCAL ONDE É APLICADO O CONTADOR!!
-                return meio;
+                return contadorBinario;
             }
+            contadorBinario++;
             if (elemento > vetor[meio]) {
                 inicio = meio + 1;
-                contadorBinario++;
             } else {
                 fim = meio - 1;
-                contadorBinario++;
             }
         }
         return contadorBinario;
