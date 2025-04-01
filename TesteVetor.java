@@ -13,6 +13,7 @@ public class TesteVetor {
         int e;
         int qtdTestes;
 
+        
         System.out.println("Tamanho do Vetor: "); // definir o tamanho do vetor
         t = scanner.nextInt();
         System.out.println("Elemento a ser buscado: "); // Definir elemento de busca
