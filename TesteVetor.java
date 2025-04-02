@@ -37,5 +37,8 @@ public class TesteVetor {
             System.out.println(vetorTeste.buscaBinaria(e) + "\n");
 
         }
+
+        scanner.close();
+
     }
 }
