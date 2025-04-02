@@ -30,7 +30,7 @@ class FrameMenu(ctk.CTkFrame):
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
         argumentos = ["100000", str(randint(0, 99999)), qtd_testes]
-        with open("Vetor_100K.txt", "w") as arquivo_saida:
+        with open("testes/Vetor_100K.txt", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
     def button_200_callback(self):
@@ -38,7 +38,7 @@ class FrameMenu(ctk.CTkFrame):
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
         argumentos = ["200000", str(randint(0, 199999)), qtd_testes]
-        with open("Vetor_200K.txt", "w") as arquivo_saida:
+        with open("testes/Vetor_200K.txt", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
     def button_400_callback(self):
@@ -46,7 +46,7 @@ class FrameMenu(ctk.CTkFrame):
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
         argumentos = ["400000", str(randint(0, 399999)), qtd_testes]
-        with open("Vetor_400K.txt", "w") as arquivo_saida:
+        with open("testes/Vetor_400K.txt", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
     def button_800_callback(self):
@@ -54,7 +54,7 @@ class FrameMenu(ctk.CTkFrame):
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
         argumentos = ["800000.txt", str(randint(0, 799999)), qtd_testes]
-        with open("Vetor_800K", "w") as arquivo_saida:
+        with open("testes/Vetor_800K", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
     def button_16M_callback(self):
@@ -62,7 +62,7 @@ class FrameMenu(ctk.CTkFrame):
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
         argumentos = ["1600000.txt", str(randint(0, 1599999)), qtd_testes]
-        with open("Vetor_1.6M", "w") as arquivo_saida:
+        with open("testes/Vetor_1.6M", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
 class App(ctk.CTk):
