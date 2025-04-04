@@ -38,7 +38,7 @@ teste_100 = processar_arquivo("testes/Vetor_100k.txt", encoding="utf-16")
 teste_200 = processar_arquivo("testes/Vetor_200k.txt")
 teste_400 = processar_arquivo("testes/Vetor_400k.txt")
 teste_800 = processar_arquivo("testes/Vetor_800k.txt", encoding="utf-16")
-# teste_16M = processar_arquivo("testes/Vetor_1.6M.txt", encoding="utf-16")
+teste_16M = processar_arquivo("testes/Vetor_1,6M.txt")
 
 def plotarGraficos(arquivo, nome_identificador):
     # Média das listas que formam as linhas
@@ -65,6 +65,9 @@ def plotarGraficos(arquivo, nome_identificador):
         ax.set_title(titulos[i])
         ax.set_ylabel("Quantidade")
         ax.set_ylim(0, max(dados[i]) * 1.2)
+        step = max(dados[i] / 8)
+        ax.set_yticks(np.arange(0, max(dados[i]) + step * 2, step))
+        ax.grid()
 
     plt.tight_layout()
     plt.savefig(f'./graficos/grafico_de_medias_{nome_identificador}.png', bbox_inches='tight')
@@ -108,3 +111,4 @@ plotarGraficos(teste_100, "100K")
 plotarGraficos(teste_200, "200K")
 plotarGraficos(teste_400, "400K")
 plotarGraficos(teste_800, "800K")
+plotarGraficos(teste_16M, "1.6M")
