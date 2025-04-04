@@ -40,7 +40,7 @@ teste_400 = processar_arquivo("testes/Vetor_400k.txt")
 teste_800 = processar_arquivo("testes/Vetor_800k.txt", encoding="utf-16")
 teste_16M = processar_arquivo("testes/Vetor_1,6M.txt")
 
-def plotarGraficos(arquivo, nome_identificador):
+def converterParaDF(arquivo):
     # Média das listas que formam as linhas
     for i, linha in enumerate(arquivo):
         for j, coluna in enumerate(linha):
@@ -48,30 +48,56 @@ def plotarGraficos(arquivo, nome_identificador):
 
     # Criando os dataframes
     df = pd.DataFrame(arquivo, columns=["Bubble Sort", "Selection Sort", "Insertion Sort"])
+    
+    return df
 
+df_100 = converterParaDF(teste_100)
+df_200 = converterParaDF(teste_200)
+df_400 = converterParaDF(teste_400)
+df_800 = converterParaDF(teste_800)
+df_16M = converterParaDF(teste_16M)
+dataframes = (df_100, df_200, df_400, df_800, df_16M)
+
+def plotarGraficos(dataframes, nome_identificador):
     # Criando os gráficos
-    categorias = ['Média Bubble Sort', 'Média Selection Sort', 'Média Insertion Sort']
-    dados = [df.iloc[0], df.iloc[1], df.iloc[2]]
-    cores = ["cyan", "blue", "lightblue"]
-    titulos = ["Quantidade de trocas na Busca Linear", "Quantidade de Ordenações", "Quantidade de trocas na Busca Binária"]
+    vetores_labels = ['100k', '200k', '400k', '800k', '1.6M']
+    vetores_valores = [100000, 200000, 400000, 800000, 1600000]
+    dados_bubble = [] 
+    dados_selection = []
+    dados_insertion = []
 
-    # Posições das barras no eixo X
-    x = np.arange(len(categorias))
+    for i, valor in enumerate(dataframes): 
+        dados_bubble.append(dataframes[i].iloc[1]['Bubble Sort'])
+        dados_selection.append(dataframes[i].iloc[1]['Selection Sort'])
+        dados_insertion.append(dataframes[i].iloc[1]['Insertion Sort'])
 
-    # Criando os subgráficos de barras agrupadas
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
-    for i, ax in enumerate(axes):
-        ax.bar(categorias, dados[i], color=cores[i], edgecolor="black")
-        ax.set_title(titulos[i])
-        ax.set_ylabel("Quantidade")
-        ax.set_ylim(0, max(dados[i]) * 1.2)
-        step = max(dados[i] / 8)
-        ax.set_yticks(np.arange(0, max(dados[i]) + step * 2, step))
-        ax.grid()
+    y_bubble = np.poly1d(np.polyfit(vetores_valores, dados_bubble, 2))
+    y_selection = np.poly1d(np.polyfit(vetores_valores, dados_selection, 2))
+    y_insertion = np.poly1d(np.polyfit(vetores_valores, dados_insertion, 2))
+    
+    x_vals = np.linspace(min(vetores_valores), max(vetores_valores), 500)
 
+    plt.figure(figsize=(10, 6))
+    plt.plot(vetores_valores, dados_bubble, 'o', label='Bubble Sort (dados)')
+    plt.plot(x_vals, y_bubble(x_vals), '-', label='Bubble Sort (parábola)')
+
+    plt.plot(vetores_valores, dados_selection, 'o', label='Selection Sort (dados)')
+    plt.plot(x_vals, y_selection(x_vals), '-', label='Selection Sort (parábola)')
+
+    plt.plot(vetores_valores, dados_insertion, 'o', label='Insertion Sort (dados)')
+    plt.plot(x_vals, y_insertion(x_vals), '-', label='Insertion Sort (parábola)')
+
+    plt.xticks(vetores_valores, vetores_labels)
+
+    plt.xlabel("Tamanho do Vetor")
+    plt.ylabel("Ordenações")
+    plt.title("Quantidade de Ordenações por Tamanho de Vetor")
+    plt.legend()
+    plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f'./graficos/grafico_de_medias_{nome_identificador}.png', bbox_inches='tight')
+    plt.savefig(f'./graficos/grafico_de_{nome_identificador}.png', bbox_inches='tight')
 
+def plotarGraficos_equilibrio(df, nome_identificador):
     # Fazendo gráfico para ponto de equilíbrio
     custo_ordenacao_bubble = df.iloc[1, 0]
     custo_ordenacao_selection = df.iloc[1, 1]
@@ -107,8 +133,9 @@ def plotarGraficos(arquivo, nome_identificador):
 
     plt.savefig(f'./graficos/ponto_de_equilibrio_{nome_identificador}.png', bbox_inches='tight')
 
-plotarGraficos(teste_100, "100K")
-plotarGraficos(teste_200, "200K")
-plotarGraficos(teste_400, "400K")
-plotarGraficos(teste_800, "800K")
-plotarGraficos(teste_16M, "1.6M")
+plotarGraficos(dataframes, "todos")
+plotarGraficos_equilibrio(df_100, "100K")
+plotarGraficos_equilibrio(df_200, "200K")
+plotarGraficos_equilibrio(df_400, "400K")
+plotarGraficos_equilibrio(df_800, "800K")
+plotarGraficos_equilibrio(df_16M, "1.6M")
