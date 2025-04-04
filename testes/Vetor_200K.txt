@@ -1,7 +1,3 @@
-Tamanho do Vetor: 
-Elemento a ser buscado: 
-Quantidade de Testes: 
-
 Bateria de Testes 1 
 200000
 9998680039
