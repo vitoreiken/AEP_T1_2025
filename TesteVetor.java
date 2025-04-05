@@ -1,69 +1,47 @@
 import java.util.Scanner;
-
 public class TesteVetor {
     public static void main(String[] args) {
-        boolean continuar = true;
+        // NossoVetor vetorTeste = new NossoVetor(10);
+        // vetorTeste.preencheVetor();
+        // vetorTeste.bubbleSort();
+        // System.out.println(vetorTeste.buscaBinaria(7));
+        // System.out.println(vetorTeste);
+
         Scanner scanner = new Scanner(System.in);
+        NossoVetor vetorTeste;
+        int t;
+        int e;
+        int qtdTestes;
 
-        while (continuar) {
-            System.out.print("Qual o tamanho do vetor? ");
-            int tamanhoVetor = scanner.nextInt();
+        System.out.println("Tamanho do Vetor: ");
+        t = scanner.nextInt();
+        System.out.println("Elemento a ser buscado: ");
+        e = scanner.nextInt();
+        System.out.println("Quantidade de Testes: ");
+        qtdTestes = scanner.nextInt();
 
-            NossoVetor vetor = new NossoVetor(tamanhoVetor);
-            vetor.preencheVetor();
+        for (int i = 1; i < qtdTestes + 1; i++) {
+            vetorTeste = new NossoVetor(t);
+            System.out.printf("\nBateria de Testes %d \n", i);
 
-            System.out.println("Escolha uma opção:");
-            System.out.println("1 - Bubble Sort");
-            System.out.println("2 - Selection Sort");
-            System.out.println("3 - Insertion Sort");
-            System.out.println("4 - Busca Linear");
-            System.out.println("5 - Busca Binária (exige vetor ordenado)");
-            System.out.println("0 - Sair");
-            System.out.print("Opção: ");
-            int opcao = scanner.nextInt();
+            vetorTeste.preencheVetor();
+            System.out.println(vetorTeste.buscaLinear(e));  // busca linear antes de ordenar o vetor
+            System.out.println(vetorTeste.bubbleSort());
+            System.out.println(vetorTeste.buscaBinaria(e) + "\n");   // busca binária depois de ordenar o valor
 
-            switch (opcao) {
-                case 1:
-                    System.out.println("Comparações Bubble Sort: " + vetor.bubbleSort());
-                    break;
-                case 2:
-                    System.out.println("Comparações Selection Sort: " + vetor.selectionSort());
-                    break;
-                case 3:
-                    System.out.println("Comparações Insertion Sort: " + vetor.insertionSort());
-                    break;
-                case 4: {
-                    System.out.print("Qual número deseja buscar? ");
-                    int num = scanner.nextInt();
-                    int passos = vetor.buscaLinear(num);
-                    System.out.println("Passos Busca Linear: " + passos);
-                    break;
-                }
-                case 5: {
-                    vetor.selectionSort(); // ordena antes de buscar
-                    System.out.print("Qual número deseja buscar? ");
-                    int num = scanner.nextInt();
-                    int passos = vetor.buscaBinaria(num);
-                    System.out.println("Passos Busca Binária: " + passos);
-                    break;
-                }
-                case 0:
-                    continuar = false;
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
-            }
+            vetorTeste.preencheVetor();
+            System.out.println(vetorTeste.buscaLinear(e));
+            System.out.println(vetorTeste.selectionSort());
+            System.out.println(vetorTeste.buscaBinaria(e) + "\n");
 
-            if (opcao != 0) {
-                System.out.print("Deseja realizar outra operação? (s/n): ");
-                char resposta = scanner.next().toLowerCase().charAt(0);
-                if (resposta != 's') {
-                    continuar = false;
-                }
-            }
+            vetorTeste.preencheVetor();
+            System.out.println(vetorTeste.buscaLinear(e));
+            System.out.println(vetorTeste.insertionSort());
+            System.out.println(vetorTeste.buscaBinaria(e) + "\n");
+
         }
 
-        System.out.println("Programa encerrado.");
         scanner.close();
+
     }
 }
