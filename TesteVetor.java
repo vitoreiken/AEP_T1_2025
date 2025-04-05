@@ -24,36 +24,36 @@ public class TesteVetor {
 
             switch (opcao) {
                 case 1:
-                    System.out.println(vetor.bubbleSort());
+                    System.out.println("\nBubble Sort\n" + vetor.bubbleSort());
                     break;
                 case 2:
-                    System.out.println(vetor.selectionSort());
+                    System.out.println("\nSelection Sort\n" + vetor.selectionSort());
                     break;
                 case 3:
-                    System.out.println(vetor.insertionSort());
+                    System.out.println("\nInsertion Sort\n" + vetor.insertionSort());
                     break;
                 case 4: {
                     System.out.print("Qual número deseja buscar? ");
                     int num = scanner.nextInt();
-                    System.out.println(vetor.buscaLinear(num));
+                    System.out.println("\nBusca Linear\n" + vetor.buscaLinear(num));
                     break;
                 }
                 case 5: {
                     vetor.selectionSort(); // ordena antes de buscar
                     System.out.print("Qual número deseja buscar? ");
                     int num = scanner.nextInt();
-                    System.out.println(vetor.buscaBinaria(num));
+                    System.out.println("\nBusca Binária\n" + vetor.buscaBinaria(num));
                     break;
                 }
                 case 0:
                     continuar = false;
                     break;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("\nOpção inválida!");
             }
 
             if (opcao != 0) {
-                System.out.print("Deseja realizar outra operação? (s/n): ");
+                System.out.print("\nDeseja realizar outra operação? (s/n): ");
                 char resposta = scanner.next().toLowerCase().charAt(0);
                 if (resposta != 's') {
                     continuar = false;
