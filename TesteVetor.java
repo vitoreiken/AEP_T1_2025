@@ -24,7 +24,7 @@ public class TesteVetor {
             vetorTeste.preencheVetor();
             System.out.println(vetorTeste.buscaLinear(e));  // busca linear antes de ordenar o vetor
             System.out.println(vetorTeste.bubbleSort());
-            System.out.println(vetorTeste.buscaBinaria(e) + "\n");   // busca binária depois de ordenar o valor 
+            System.out.println(vetorTeste.buscaBinaria(e) + "\n");   // busca binária depois de ordenar o valor
 
             vetorTeste.preencheVetor();
             System.out.println(vetorTeste.buscaLinear(e));
