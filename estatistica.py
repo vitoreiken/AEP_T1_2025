@@ -119,35 +119,28 @@ def plotarGraficosBuscas(dataframes):
         dados_selection_BB.append(df.iloc[2]['Selection Sort'])
         dados_insertion_BB.append(df.iloc[2]['Insertion Sort'])
     
-    # Criando o gráfico com eixo Y duplo
     fig, ax1 = plt.subplots(figsize=(10, 6))
-    ax2 = ax1.twinx()  # Eixo secundário para busca binária
+    ax2 = ax1.twinx()
     
-    # Plotando os dados da Busca Linear no eixo primário (ax1)
     ax1.plot(vetores_valores, dados_bubble_BL, 'o-', label='Busca Linear (Bubble Sort)', color='red')
     ax1.plot(vetores_valores, dados_selection_BL, 'o-', label='Busca Linear (Selection Sort)', color='green')
     ax1.plot(vetores_valores, dados_insertion_BL, 'o-', label='Busca Linear (Insertion Sort)', color='blue')
     
-    # Plotando os dados da Busca Binária no eixo secundário (ax2)
     ax2.plot(vetores_valores, dados_bubble_BB, 's--', label='Busca Binária (Bubble Sort)', color='orange')
     ax2.plot(vetores_valores, dados_selection_BB, 's--', label='Busca Binária (Selection Sort)', color='purple')
     ax2.plot(vetores_valores, dados_insertion_BB, 's--', label='Busca Binária (Insertion Sort)', color='brown')
     
-    # Configurações dos eixos
     ax1.set_xlabel("Tamanho do Vetor")
     ax1.set_ylabel("Número de Comparações - Busca Linear", color='black')
     ax2.set_ylabel("Número de Comparações - Busca Binária", color='black')
     ax1.tick_params(axis='y', labelcolor='black')
     ax2.tick_params(axis='y', labelcolor='black')
     
-    # Configurando os ticks do eixo X
     ax1.set_xticks(vetores_valores)
     ax1.set_xticklabels(vetores_labels)
     
-    # Adicionando grid (apenas no eixo primário)
     ax1.grid(True)
     
-    # Combinando as legendas dos dois eixos
     lines1, labels1 = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
     ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
