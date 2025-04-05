@@ -13,12 +13,9 @@ public class TesteVetor {
         int e;
         int qtdTestes;
 
-        System.out.println("Tamanho do Vetor: ");
-        t = scanner.nextInt();
-        System.out.println("Elemento a ser buscado: ");
-        e = scanner.nextInt();
-        System.out.println("Quantidade de Testes: ");
-        qtdTestes = scanner.nextInt();
+        t = Integer.parseInt(args[0]);
+        e = Integer.parseInt(args[1]);
+        qtdTestes = Integer.parseInt(args[2]);
 
         for (int i = 1; i < qtdTestes + 1; i++) {
             vetorTeste = new NossoVetor(t);
