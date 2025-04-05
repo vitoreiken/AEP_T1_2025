@@ -151,46 +151,46 @@ def plotarGraficosBuscas(dataframes):
     plt.show()
 
 
-def plotarGraficos_equilibrio(df, nome_identificador):
-    # Fazendo gráfico para ponto de equilíbrio
-    custo_ordenacao_bubble = df.iloc[1, 0]
-    custo_ordenacao_selection = df.iloc[1, 1]
-    custo_ordenacao_insertion = df.iloc[1, 2]
+def plotarGraficosEquilibrio(dataframes):
+    bubble_equilibrio = []
+    selection_equilibrio = []
+    insertion_equilibrio = []
 
-    economia_por_busca_bubble = df.iloc[0, 0] - df.iloc[2, 0]
-    economia_por_busca_selection = df.iloc[0, 1] - df.iloc[2, 1]
-    economia_por_busca_insertion = df.iloc[0, 2] - df.iloc[2, 2]
+    vetores_valores = [100000, 200000, 400000, 800000, 1600000]
+    vetores_labels = ['100k', '200k', '400k', '800k', '1.6M']
+    
+    for df in dataframes:
+        custo_ordenacao_bubble = df.iloc[1, 0]
+        custo_ordenacao_selection = df.iloc[1, 1]
+        custo_ordenacao_insertion = df.iloc[1, 2]
 
-    # Calculando o ponto de equilíbrio para cada algoritmo
-    numero_buscas_equilibrio_bubble = custo_ordenacao_bubble / economia_por_busca_bubble if economia_por_busca_bubble > 0 else np.inf
-    numero_buscas_equilibrio_selection = custo_ordenacao_selection / economia_por_busca_selection if economia_por_busca_selection > 0 else np.inf
-    numero_buscas_equilibrio_insertion = custo_ordenacao_insertion / economia_por_busca_insertion if economia_por_busca_insertion > 0 else np.inf
+        economia_por_busca_bubble = df.iloc[0, 0] - df.iloc[2, 0]
+        economia_por_busca_selection = df.iloc[0, 1] - df.iloc[2, 1]
+        economia_por_busca_insertion = df.iloc[0, 2] - df.iloc[2, 2]
 
-    ponto_equilibrio_bubble = df.iloc[0, 0] * numero_buscas_equilibrio_bubble
-    ponto_equilibrio_selection = df.iloc[0, 1] * numero_buscas_equilibrio_selection
-    ponto_equilibrio_insertion = df.iloc[0, 2] * numero_buscas_equilibrio_insertion
-    # Criando o gráfico
-    plt.figure(figsize=(8, 6))
-    metodos = ["Bubble Sort", "Selection Sort", "Insertion Sort"]
-    pontos_equilibrio = [ponto_equilibrio_bubble, ponto_equilibrio_selection, ponto_equilibrio_insertion]
-    print(pontos_equilibrio)
-    plt.bar(metodos, pontos_equilibrio, color=['yellowgreen', 'blue', 'lightblue'], edgecolor="black")
+        num_buscas_bubble = custo_ordenacao_bubble / economia_por_busca_bubble if economia_por_busca_bubble > 0 else np.inf
+        num_buscas_selection = custo_ordenacao_selection / economia_por_busca_selection if economia_por_busca_selection > 0 else np.inf
+        num_buscas_insertion = custo_ordenacao_insertion / economia_por_busca_insertion if economia_por_busca_insertion > 0 else np.inf
 
-    # Adicionando rótulos
-    plt.xlabel("Método de Ordenação")
+        bubble_equilibrio.append(num_buscas_bubble)
+        selection_equilibrio.append(num_buscas_selection)
+        insertion_equilibrio.append(num_buscas_insertion)
+    
+    plt.figure(figsize=(10, 6))
+    plt.plot(vetores_valores, bubble_equilibrio, 'o-', label='Bubble Sort', color='yellowgreen')
+    plt.plot(vetores_valores, selection_equilibrio, 'o-', label='Selection Sort', color='blue')
+    plt.plot(vetores_valores, insertion_equilibrio, 'o-', label='Insertion Sort', color='lightblue')
+    
+    plt.xticks(vetores_valores, vetores_labels)
+    plt.xlabel("Tamanho do Vetor")
     plt.ylabel("Número de Buscas para Equilibrar o Custo")
-    plt.title("Ponto de Equilíbrio da Ordenação")
-    plt.ylim(0, max(pontos_equilibrio) * 1.2)
-
-    for i, v in enumerate(pontos_equilibrio):
-        plt.text(i, v + 5, f"{v:.0f}", ha="center", fontsize=12)
-
-    plt.savefig(f'./graficos/ponto_de_equilibrio_{nome_identificador}.png', bbox_inches='tight')
+    plt.title("Ponto de Equilíbrio vs. Tamanho do Vetor")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('./graficos/ponto_de_equilibrio_linhas.png', bbox_inches='tight')
+    plt.show()
 
 plotarGraficosOrdenacoes(dataframes)
 plotarGraficosBuscas(dataframes)
-plotarGraficos_equilibrio(df_100, "100K")
-plotarGraficos_equilibrio(df_200, "200K")
-plotarGraficos_equilibrio(df_400, "400K")
-plotarGraficos_equilibrio(df_800, "800K")
-plotarGraficos_equilibrio(df_16M, "1.6M")
+plotarGraficosEquilibrio(dataframes)
