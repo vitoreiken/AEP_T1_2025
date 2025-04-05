@@ -58,7 +58,7 @@ df_800 = converterParaDF(teste_800)
 df_16M = converterParaDF(teste_16M)
 dataframes = (df_100, df_200, df_400, df_800, df_16M)
 
-def plotarGraficos(dataframes, nome_identificador):
+def plotarGraficosOrdenacoes(dataframes):
     # Criando os gráficos
     vetores_labels = ['100k', '200k', '400k', '800k', '1.6M']
     vetores_valores = [100000, 200000, 400000, 800000, 1600000]
@@ -70,7 +70,7 @@ def plotarGraficos(dataframes, nome_identificador):
         dados_bubble.append(dataframes[i].iloc[1]['Bubble Sort'])
         dados_selection.append(dataframes[i].iloc[1]['Selection Sort'])
         dados_insertion.append(dataframes[i].iloc[1]['Insertion Sort'])
-
+    print(dados_bubble)
     y_bubble = np.poly1d(np.polyfit(vetores_valores, dados_bubble, 2))
     y_selection = np.poly1d(np.polyfit(vetores_valores, dados_selection, 2))
     y_insertion = np.poly1d(np.polyfit(vetores_valores, dados_insertion, 2))
@@ -95,7 +95,68 @@ def plotarGraficos(dataframes, nome_identificador):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f'./graficos/grafico_de_{nome_identificador}.png', bbox_inches='tight')
+    plt.savefig('./graficos/grafico_de_ordenacoes.png', bbox_inches='tight')
+
+def plotarGraficosBuscas(dataframes):
+    # Labels e valores para os tamanhos dos vetores
+    vetores_labels = ['100k', '200k', '400k', '800k', '1.6M']
+    vetores_valores = [100000, 200000, 400000, 800000, 1600000]
+    
+    # Listas para armazenar os dados de buscas
+    dados_bubble_BL = []
+    dados_selection_BL = []
+    dados_insertion_BL = []
+    dados_bubble_BB = []
+    dados_selection_BB = []
+    dados_insertion_BB = []
+    
+    # Coleta dos dados de cada dataframe
+    for df in dataframes: 
+        dados_bubble_BL.append(df.iloc[0]['Bubble Sort'])
+        dados_selection_BL.append(df.iloc[0]['Selection Sort'])
+        dados_insertion_BL.append(df.iloc[0]['Insertion Sort'])
+        dados_bubble_BB.append(df.iloc[2]['Bubble Sort'])
+        dados_selection_BB.append(df.iloc[2]['Selection Sort'])
+        dados_insertion_BB.append(df.iloc[2]['Insertion Sort'])
+    
+    # Criando o gráfico com eixo Y duplo
+    fig, ax1 = plt.subplots(figsize=(10, 6))
+    ax2 = ax1.twinx()  # Eixo secundário para busca binária
+    
+    # Plotando os dados da Busca Linear no eixo primário (ax1)
+    ax1.plot(vetores_valores, dados_bubble_BL, 'o-', label='Busca Linear (Bubble Sort)', color='red')
+    ax1.plot(vetores_valores, dados_selection_BL, 'o-', label='Busca Linear (Selection Sort)', color='green')
+    ax1.plot(vetores_valores, dados_insertion_BL, 'o-', label='Busca Linear (Insertion Sort)', color='blue')
+    
+    # Plotando os dados da Busca Binária no eixo secundário (ax2)
+    ax2.plot(vetores_valores, dados_bubble_BB, 's--', label='Busca Binária (Bubble Sort)', color='orange')
+    ax2.plot(vetores_valores, dados_selection_BB, 's--', label='Busca Binária (Selection Sort)', color='purple')
+    ax2.plot(vetores_valores, dados_insertion_BB, 's--', label='Busca Binária (Insertion Sort)', color='brown')
+    
+    # Configurações dos eixos
+    ax1.set_xlabel("Tamanho do Vetor")
+    ax1.set_ylabel("Número de Comparações - Busca Linear", color='black')
+    ax2.set_ylabel("Número de Comparações - Busca Binária", color='black')
+    ax1.tick_params(axis='y', labelcolor='black')
+    ax2.tick_params(axis='y', labelcolor='black')
+    
+    # Configurando os ticks do eixo X
+    ax1.set_xticks(vetores_valores)
+    ax1.set_xticklabels(vetores_labels)
+    
+    # Adicionando grid (apenas no eixo primário)
+    ax1.grid(True)
+    
+    # Combinando as legendas dos dois eixos
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+    
+    plt.title("Comparação entre Buscas Linear e Binária (Eixo Y Duplo)")
+    plt.tight_layout()
+    plt.savefig('./graficos/grafico_de_buscas_duplo.png', bbox_inches='tight')
+    plt.show()
+
 
 def plotarGraficos_equilibrio(df, nome_identificador):
     # Fazendo gráfico para ponto de equilíbrio
@@ -119,7 +180,7 @@ def plotarGraficos_equilibrio(df, nome_identificador):
     plt.figure(figsize=(8, 6))
     metodos = ["Bubble Sort", "Selection Sort", "Insertion Sort"]
     pontos_equilibrio = [ponto_equilibrio_bubble, ponto_equilibrio_selection, ponto_equilibrio_insertion]
-
+    print(pontos_equilibrio)
     plt.bar(metodos, pontos_equilibrio, color=['yellowgreen', 'blue', 'lightblue'], edgecolor="black")
 
     # Adicionando rótulos
@@ -133,7 +194,8 @@ def plotarGraficos_equilibrio(df, nome_identificador):
 
     plt.savefig(f'./graficos/ponto_de_equilibrio_{nome_identificador}.png', bbox_inches='tight')
 
-plotarGraficos(dataframes, "todos")
+plotarGraficosOrdenacoes(dataframes)
+plotarGraficosBuscas(dataframes)
 plotarGraficos_equilibrio(df_100, "100K")
 plotarGraficos_equilibrio(df_200, "200K")
 plotarGraficos_equilibrio(df_400, "400K")
