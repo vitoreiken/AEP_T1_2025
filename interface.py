@@ -53,16 +53,16 @@ class FrameMenu(ctk.CTkFrame):
         janela = ctk.CTkInputDialog(text="Quantos testes você deseja realizar com um vetor de 800.000 elementos? (responda com um número inteiro)", title="Testes com 800.000")
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
-        argumentos = ["800000.txt", str(randint(0, 799999)), qtd_testes]
-        with open("testes/Vetor_800K", "w") as arquivo_saida:
+        argumentos = ["800000", str(randint(0, 799999)), qtd_testes]
+        with open("testes/Vetor_800K.txt", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
     def button_16M_callback(self):
         janela = ctk.CTkInputDialog(text="Quantos testes você deseja realizar com um vetor de 1.600.000 elementos? (responda com um número inteiro)", title="Testes com 1.600.000")
         qtd_testes = janela.get_input()
         subprocess.run(["javac", "TesteVetor.java"])
-        argumentos = ["1600000.txt", str(randint(0, 1599999)), qtd_testes]
-        with open("testes/Vetor_1.6M", "w") as arquivo_saida:
+        argumentos = ["1600000", str(randint(0, 1599999)), qtd_testes]
+        with open("testes/Vetor_1.6M.txt", "w") as arquivo_saida:
             subprocess.run(["java", "TesteVetor"] + argumentos, stdout=arquivo_saida, text=True)
 
 class App(ctk.CTk):
