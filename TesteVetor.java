@@ -24,27 +24,25 @@ public class TesteVetor {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Comparações Bubble Sort: " + vetor.bubbleSort());
+                    System.out.println(vetor.bubbleSort());
                     break;
                 case 2:
-                    System.out.println("Comparações Selection Sort: " + vetor.selectionSort());
+                    System.out.println(vetor.selectionSort());
                     break;
                 case 3:
-                    System.out.println("Comparações Insertion Sort: " + vetor.insertionSort());
+                    System.out.println(vetor.insertionSort());
                     break;
                 case 4: {
                     System.out.print("Qual número deseja buscar? ");
                     int num = scanner.nextInt();
-                    int passos = vetor.buscaLinear(num);
-                    System.out.println("Passos Busca Linear: " + passos);
+                    System.out.println(vetor.buscaLinear(num));
                     break;
                 }
                 case 5: {
                     vetor.selectionSort(); // ordena antes de buscar
                     System.out.print("Qual número deseja buscar? ");
                     int num = scanner.nextInt();
-                    int passos = vetor.buscaBinaria(num);
-                    System.out.println("Passos Busca Binária: " + passos);
+                    System.out.println(vetor.buscaBinaria(num));
                     break;
                 }
                 case 0:
